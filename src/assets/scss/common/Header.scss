@@ -1,0 +1,70 @@
+// font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+@mixin regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@mixin bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+// colors
+
+$black: #020203;
+$red: #E60000;
+
+//
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $black;
+  &__logo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    color: $red;
+    text-decoration: none;
+    margin: 1.5rem 4rem 1.5rem 2rem;
+    font-size: 24px;
+    &__img {
+      width: 20%;
+      height: auto;
+    }
+    &__brand {
+      margin-left: 0.5rem;
+      @include regular;
+    }
+  }
+  &__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 4rem;
+    width: 100vw;
+    &__menu {
+      @include regular;
+      font-size: 24px;
+      text-decoration: none;
+      color: white;
+      position: relative;
+      &:hover {
+      }
+    }
+  }
+}

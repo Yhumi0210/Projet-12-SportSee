@@ -1,0 +1,42 @@
+// autres pages scss à import
+
+@import './common/Header.scss';
+
+// font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+@mixin regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@mixin bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+// colors
+
+$black: #020203;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+
+}
+
+h1 {
+  @include medium;
+  font-size: 48px;
+}
