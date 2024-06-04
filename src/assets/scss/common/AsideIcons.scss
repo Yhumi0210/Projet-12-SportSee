@@ -1,0 +1,59 @@
+// font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+@mixin regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@mixin bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+// colors
+
+$black: #020203;
+$red: #E60000;
+
+//
+
+.aside {
+  background-color: $black;
+  width: 8vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rem 0 5rem 0;
+  &__icons {
+    display: flex;
+    flex-direction: column;
+
+    &__each-icons {
+      margin: 1rem 0;
+      background-color: white;
+      border-radius: 6px;
+      transition: transform 200ms ease-in-out;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
+  }
+  &__text {
+    @include medium;
+    color: white;
+    font-size: 12px;
+    writing-mode: sideways-lr;
+  }
+}

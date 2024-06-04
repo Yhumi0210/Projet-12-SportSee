@@ -40,10 +40,10 @@ $red: #E60000;
     justify-content: start;
     color: $red;
     text-decoration: none;
-    margin: 1.5rem 4rem 1.5rem 2rem;
+    margin: 1.5rem 0 1.5rem 2rem;
     font-size: 24px;
     &__img {
-      width: 20%;
+      width: 3.5rem;
       height: auto;
     }
     &__brand {
@@ -56,14 +56,16 @@ $red: #E60000;
     flex-direction: row;
     justify-content: space-between;
     margin: 0 4rem;
-    width: 100vw;
+    width: 350vw;
     &__menu {
       @include regular;
       font-size: 24px;
       text-decoration: none;
       color: white;
-      position: relative;
+      transition: transform 200ms ease-in-out;
       &:hover {
+        transform: scale(1.05);
+        color: $red;
       }
     }
   }
