@@ -30,18 +30,22 @@ $red: #E60000;
   display: flex;
   flex-direction: row;
   .maincontent {
+    margin: 2rem 4rem;
+    height: auto;
     &__title {
-      @include medium;
+      display: flex;
+      flex-direction: row;
       color: $black;
-      font-size: 48px;
       &__name {
         color: $red;
+        margin-left: 0.5rem;
       }
     }
     &__applause {
       @include regular;
       color: $black;
       font-size: 18px;
+      margin-top: 1rem;
     }
   }
 }

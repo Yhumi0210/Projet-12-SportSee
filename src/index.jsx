@@ -6,7 +6,7 @@ import HomePage from './components/HomePage.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
         <Routes>
-            <Route path='/' element={<HomePage />} />
+            <Route path='/user/:userId' element={<HomePage />} />
         </Routes>
     </Router>
 )

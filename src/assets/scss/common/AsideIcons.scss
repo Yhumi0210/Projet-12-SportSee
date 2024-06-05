@@ -35,6 +35,10 @@ $red: #E60000;
   justify-content: space-between;
   align-items: center;
   padding: 30rem 0 5rem 0;
+  @media (max-width: 1024px) {
+    height: 72.5vh;
+    padding: 5rem 0 2rem 0;
+  }
   &__icons {
     display: flex;
     flex-direction: column;
