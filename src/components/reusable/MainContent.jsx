@@ -2,6 +2,7 @@ import AsideIcons from '../common/AsideIcons.jsx'
 import FirstName from '../datas/FirstName.jsx'
 import Activity from '../datas/Activity.jsx'
 import AverageSessions from '../datas/AverageSessions.jsx'
+import Performance from '../datas/Performance.jsx'
 
 function MainContent() {
 
@@ -19,6 +20,7 @@ function MainContent() {
             </article>
             <Activity />
             <AverageSessions />
+            <Performance />
         </section>
     )
 }
