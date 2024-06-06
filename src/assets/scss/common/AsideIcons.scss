@@ -29,15 +29,16 @@ $red: #E60000;
 .aside {
   background-color: $black;
   width: 8vw;
+  min-width: 8vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 30rem 0 5rem 0;
+  padding: 25rem 0 5rem 0;
   @media (max-width: 1024px) {
-    height: 72.5vh;
-    padding: 5rem 0 2rem 0;
+    height: 76.1vh;
+    padding: 3rem 0;
   }
   &__icons {
     display: flex;

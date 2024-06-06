@@ -23,15 +23,18 @@
 
 $black: #020203;
 $red: #E60000;
+$grey: #74798C;
+$bg-grey: #979797;
 
 //
 
 .content {
   display: flex;
   flex-direction: row;
+  height: 100%;
   .maincontent {
     margin: 2rem 4rem;
-    height: auto;
+    height: 100%;
     &__title {
       display: flex;
       flex-direction: row;
@@ -45,7 +48,12 @@ $red: #E60000;
       @include regular;
       color: $black;
       font-size: 18px;
-      margin-top: 1rem;
+      margin: 1rem 0 3rem 0;
+    }
+    &__chart {
+      display: flex;
+      flex-direction: row;
+      height: auto;
     }
   }
 }
