@@ -23,34 +23,18 @@
 
 $black: #020203;
 $red: #E60000;
-$light-grey: #9B9EAC;
 $grey: #74798C;
 $bg-grey: #FBFBFB;
+$bg-black: #282D30;
 
-//
-
-.barchart {
-  background-color: $bg-grey;
-  width: 100%;
-  max-width: 55vw;
+.radarchart {
+  background-color: $bg-black;
+  min-width: 12rem;
   height: 12rem;
   border-radius: 5px;
-  padding: 1rem 1rem 1.5rem 1rem;
-  margin: 0 0 1.5rem 0;
   @include medium;
-  font-size: 14px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   @media (min-width: 1440px) {
-    height: 18rem;
-    max-width: 58vw;
-  }
-  &__title {
-    font-size: 15px;
-  }
-  .recharts-legend-item-text {
-    color: $grey!important;
-  }
-  .legend-item-1 {
-    margin: 0!important;
+    width: 17rem;
+    height: 17rem;
   }
 }

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { fetchUser } from '../../services/service.js'
+import User from '../../models/User.js'
 
 function FirstName() {
     // Création de l'état pour stocker le prénom de l'utilisateur
@@ -8,17 +10,13 @@ function FirstName() {
 
     useEffect(() => {
         if (!userId) return
-
-        fetch(`http://localhost:3000/user/${userId}`)
-            .then(response => response.json())
-            .then(result => {
-                if (result && result.data && result.data.userInfos && result.data.userInfos.firstName) {
-                    setFirstName(result.data.userInfos.firstName)
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching user data:', error)
-            })
+        fetchUser(userId).then(result => {
+            if (result && result.data && result.data.userInfos && result.data.userInfos.firstName) {
+                setFirstName(result.data.userInfos.firstName)
+                const user = new User(result.data)
+                console.log(user)
+            }
+        })
     }, [userId])
 
     return (

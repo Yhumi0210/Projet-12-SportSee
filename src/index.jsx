@@ -10,3 +10,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Routes>
     </Router>
 )
+
+// si je veux je peux ajouter une page sur laquelle je clique sur user 12 ou 18
+// pour etre redirigé au lieu d'écrire l'URL

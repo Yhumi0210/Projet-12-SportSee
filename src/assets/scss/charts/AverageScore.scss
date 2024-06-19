@@ -1,0 +1,80 @@
+// font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+@mixin regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@mixin bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+// colors
+
+$black: #020203;
+$red: #E60000;
+$grey: #74798C;
+$bg-grey: #FBFBFB;
+$bg-black: #282D30;
+
+.chartgoal {
+  position: relative;
+  background-color: $bg-grey;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+  @include medium;
+  font-size: 14px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  @media (min-width: 1440px) {
+    width: 17rem;
+    height: 17rem;
+  }
+  &__title {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: $bg-black;
+    font-size: 15px;
+    @include medium;
+  }
+  &__text {
+    position: absolute;
+    @media (min-width: 1024px) {
+      top: 4rem;
+      left: 4rem;
+    }
+    @media (min-width: 1440px) {
+      top: 6.3rem;
+      left: 6.7rem;
+    }
+    &__score {
+      color: $bg-black;
+      font-size: 22px;
+      @include bold;
+      @media (min-width: 1440px) {
+        font-size: 26px;
+      }
+    }
+    &__obj {
+      color: $grey;
+      font-size: 14px;
+      @include medium;
+      @media (min-width: 1440px) {
+        font-size: 16px;
+      }
+    }
+  }
+}

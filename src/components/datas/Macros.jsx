@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import {fetchUser} from "../../services/service.js";
 
 function Macro({ type }) { // 'type' peut être 'calorieCount', 'proteinCount', 'carbohydrateCount', ou 'lipidCount'
     const { userId } = useParams()
     const [value, setValue] = useState(0)
+    const [setError] = useState(null)
 
     useEffect(() => {
-        if (!userId) return
-
-        fetch(`http://localhost:3000/user/${userId}`)
-            .then(response => response.json())
-            .then(result => {
-                if (result && result.data && result.data.keyData && result.data.keyData[type]) {
-                    setValue(result.data.keyData[type])
-                }
-            })
+        if (!userId) {
+            setError("User ID is not defined")
+            return
+        }
+        fetchUser(userId).then(result => {
+            if (result && result.data && result.data.keyData && result.data.keyData[type]) {
+                setValue(result.data.keyData[type])
+            }
+        })
             .catch(error => {
                 console.error('Erreur lors de la récupération des données utilisateur :', error)
             })
-    }, [userId, type]) // Ajouter 'type' aux dépendances de useEffect pour réagir aux changements
+    }, [userId, type])
 
     // Fonction pour formater le type de manière lisible
     function formatType(type) {
