@@ -2,7 +2,17 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts'
 import {fetchTypeActivity} from '../../../services/service.js'
-import {useMediaQuery} from "react-responsive";
+import {useMediaQuery} from 'react-responsive'
+
+/**
+ * TypeActivity component that displays a radar chart of the user's activity types.
+ *
+ * @component
+ * @example
+ * return (
+ *   <TypeActivity />
+ * )
+ */
 
 function TypeActivity() {
     const {userId} = useParams()
@@ -46,7 +56,7 @@ function TypeActivity() {
         } else if (isSmallScreen) {
             setRadarSize(40)
         }
-    }, [userId, data, setError,isLargeScreen, isMediumScreen, isSmallScreen])
+    }, [])
 
     return (
         <div className='radarchart'>

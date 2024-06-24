@@ -1,6 +1,19 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import {fetchUser} from "../../services/service.js";
+import PropTypes from 'prop-types'
+import {fetchUser} from '../../services/service.js'
+
+/**
+ * Macro component that fetches and displays the user's macro data.
+ *
+ * @component
+ * @param {object} props - The component props.
+ * @param {string} props.type - The type of macro data to display. Can be 'calorieCount', 'proteinCount', 'carbohydrateCount', or 'lipidCount'.
+ * @example
+ * return (
+ *   <Macro type="calorieCount" />
+ * )
+ */
 
 function Macro({ type }) { // 'type' peut être 'calorieCount', 'proteinCount', 'carbohydrateCount', ou 'lipidCount'
     const { userId } = useParams()
@@ -20,7 +33,14 @@ function Macro({ type }) { // 'type' peut être 'calorieCount', 'proteinCount', 
             .catch(error => {
                 console.error('Erreur lors de la récupération des données utilisateur :', error)
             })
-    }, [userId, type])
+    }, [])
+
+    /**
+     * Format the type to a readable string.
+     *
+     * @param {string} type - The macro type.
+     * @returns {string} The formatted macro type.
+     */
 
     // Fonction pour formater le type de manière lisible
     function formatType(type) {
@@ -49,6 +69,14 @@ function Macro({ type }) { // 'type' peut être 'calorieCount', 'proteinCount', 
             </div>
         </div>
     )
+}
+
+Macro.propTypes = {
+    /**
+     * The type of macro data to display.
+     * Can be 'calorieCount', 'proteinCount', 'carbohydrateCount', or 'lipidCount'.
+     */
+    type: PropTypes.oneOf(['calorieCount', 'proteinCount', 'carbohydrateCount', 'lipidCount']).isRequired,
 }
 
 export default Macro

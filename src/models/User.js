@@ -6,31 +6,18 @@ export default class User {
      * @param {number} data.id
      * @param {Object} data.userInfos
      * @param {string} data.userInfos.firstName
+     * @param {number | undefined} data.score
+     * @param {number | undefined} data.todayScore
      */
-     constructor(data) {
-     /**
-     * @property {number} id
-     * @property {string} firstName
-     */
-    this.id = data.id
-    this.firstName = data.userInfos.firstName
-
-    // {
-    //     "data": {
-    //     "id": 12,
-    //         "userInfos": {
-    //         "firstName": "Karl",
-    //             "lastName": "Dovineau",
-    //             "age": 31
-    //     },
-    //     "todayScore": 0.12,
-    //         "keyData": {
-    //         "calorieCount": 1930,
-    //             "proteinCount": 155,
-    //             "carbohydrateCount": 290,
-    //             "lipidCount": 50
-    //     }
-    // }
-    // }
+    constructor(data) {
+        /**
+         * @property {number} id
+         * @property {string} firstName
+         * @property {number | undefined} score
+         * @property {number | undefined} todayScore
+         */
+        this.id = data.id
+        this.firstName = data.userInfos.firstName
+        this.score = data.score || data.todayScore
     }
 }

@@ -1,30 +1,44 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import {  useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import CustomDot from './CustomDot.jsx'
 import CustomToolTip from './CustomToolTip.jsx'
-import {fetchAverageSessions} from '../../../services/service.js'
+import PropTypes from 'prop-types'
 
+/**
+ * AverageSessions component that displays a line chart of the user's average session duration.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AverageSessions />
+ * )
+ */
 
-function AverageSessions() {
-    const { userId } = useParams()
-    const [averageSessions, setAverageSessions] = useState('')
+function AverageSessions(props) {
     const [activeIndex] = useState(-1)
 
-    useEffect(() => {
-        if (!userId) return
-        fetchAverageSessions(userId).then(result => {
-            if (result && result.data && result.data.sessions) {
-                setAverageSessions(result.data.sessions)
 
-            }
-        })
-    }, [userId])
+    /**
+     * Format the label for the XAxis tick.
+     *
+     * @param {number} value - The day of the week as a number.
+     * @returns {string} The formatted day of the week.
+     */
 
     const formatLabel = (value) => {
         const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
         return days[value - 1] || value
     }
+
+    /**
+     * Custom rendering for the XAxis tick.
+     *
+     * @param {object} props - The props for the custom tick.
+     * @param {number} props.x - The x-coordinate of the tick.
+     * @param {number} props.y - The y-coordinate of the tick.
+     * @param {object} props.payload - The payload of the tick.
+     * @returns {JSX.Element} The custom tick element.
+     */
 
     const renderCustomAxisTick = ({ x, y, payload }) => {
         const xOffset = 0
@@ -44,7 +58,7 @@ function AverageSessions() {
                 sessions
             </h3>
             <ResponsiveContainer width='100%' height='100%'>
-                <LineChart data={averageSessions} margin={{ top: 0, right: 20, left: 20, bottom: 0 }}>
+                <LineChart data={props.averageSessions} margin={{ top: 0, right: 20, left: 20, bottom: 0 }}>
                     <Line
                         type="natural"
                         dataKey="sessionLength"
@@ -96,6 +110,13 @@ function AverageSessions() {
             </ResponsiveContainer>
         </div>
     )
+}
+
+AverageSessions.propTypes = {
+    /**
+     * User data containing score or todayScore.
+     */
+    averageSessions: PropTypes.array
 }
 
 export default AverageSessions

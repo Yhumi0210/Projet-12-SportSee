@@ -1,35 +1,28 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+// import { useEffect, useState } from 'react'
+// import { useParams } from 'react-router-dom'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import CustomToolTip from './CustomToolTip.jsx'
-import {fetchActivity} from '../../../services/service.js'
+// import {fetchActivity} from '../../../services/service.js'
+import PropTypes from 'prop-types'
 
+/**
+ * Activity component that displays a bar chart of daily activity.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Activity />
+ * )
+ */
 
-function Activity() {
-    const { userId } = useParams()
-    const [activities, setActivities] = useState([])
-
-    useEffect(() => {
-        if (!userId) return
-        fetchActivity(userId).then(result => {
-            if (result && result.data && result.data.sessions) {
-                const formattedData = result.data.sessions.map((session, index) => ({
-                    ...session,
-                    day: index + 1,
-                    calories: session.calories,
-                    kilogram: session.kilogram
-                }))
-                setActivities(formattedData)
-            }
-        })
-    }, [userId])
+function Activity(props) {
 
     return (
         <div className='barchart'>
             <h2 className='barchart__title'>Activité quotidienne</h2>
             <ResponsiveContainer width='100%' height='100%'>
                 <BarChart
-                    data={activities}
+                    data={props.activities}
                     margin={{
                         top: 10, right: 0, left: 0, bottom: 10,
                     }}
@@ -74,6 +67,13 @@ function Activity() {
             </ResponsiveContainer>
         </div>
     )
+}
+
+Activity.propTypes = {
+    /**
+     * User data containing user activity.
+     */
+    activities: PropTypes.array
 }
 
 export default Activity

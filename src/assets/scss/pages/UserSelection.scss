@@ -1,0 +1,89 @@
+// font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+@mixin regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@mixin bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+// colors
+
+$black: #020203;
+$red: #E60000;
+$grey: #74798C;
+$bg-grey: #FBFBFB;
+$bg-black: #282D30;
+
+//
+
+.userselect {
+  display: flex;
+  flex-direction: row;
+  //background-color: $bg-black;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0 0 25%;
+    &__brand {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      &__logo {
+        width: 6rem;
+      }
+      p {
+        font-size: 48px;
+        @include regular;
+        margin-left: 1rem;
+        color: $red;
+      }
+    }
+    &__title {
+      display: flex;
+      flex-direction: row;
+      color: $black;
+      margin: 4rem 0;
+      strong {
+        color: $red;
+        @include medium;
+        margin-left: 0.5rem;
+      }
+    }
+    &__buttons {
+      display: flex;
+      gap: 4rem;
+      &__user {
+        display: flex;
+        color: white;
+        text-decoration: none;
+        font-size: 48px;
+        @include medium;
+        background-color: $red;
+        height: 8rem;
+        width: 14rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        transition: transform 300ms ease-in-out;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}

@@ -1,29 +1,27 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { fetchUser } from '../../services/service.js'
-import User from '../../models/User.js'
+import PropTypes from 'prop-types'
 
-function FirstName() {
-    // Création de l'état pour stocker le prénom de l'utilisateur
-    const { userId } = useParams()
-    const [firstName, setFirstName] = useState('')
+/**
+ * FirstName component that fetches and displays the user's first name.
+ *
+ * @component
+ * @example
+ * return (
+ *   <FirstName />
+ * )
+ */
 
-    useEffect(() => {
-        if (!userId) return
-        fetchUser(userId).then(result => {
-            if (result && result.data && result.data.userInfos && result.data.userInfos.firstName) {
-                setFirstName(result.data.userInfos.firstName)
-                const user = new User(result.data)
-                console.log(user)
-            }
-        })
-    }, [userId])
+function FirstName(props) {
 
     return (
         <div>
-            {firstName}
+            {props.firstName}
         </div>
     )
+}
+
+FirstName.propTypes = {
+
+    firstName: PropTypes.string
 }
 
 export default FirstName

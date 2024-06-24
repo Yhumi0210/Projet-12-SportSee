@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts'
 import { useMediaQuery } from 'react-responsive'
 import PropTypes from 'prop-types'
-import {fetchUser} from '../../../services/service.js'
 
-function AverageScore() {
-    const { userId } = useParams()
-    const [data, setData] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
+/**
+ * AverageScore component that displays a radial bar chart of the user's average score.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AverageScore />
+ * )
+ */
+
+function AverageScore(props) {
     const [barSize, setBarSize] = useState(130)
 
     const isLargeScreen = useMediaQuery({ minWidth: 1440 })
@@ -17,19 +21,6 @@ function AverageScore() {
     const isSmallScreen = useMediaQuery({ maxWidth: 767 })
 
     useEffect(() => {
-        if (!userId) return
-        fetchUser(userId).then(result => {
-            if (result && result.data && (result.data.score || result.data.todayScore)) {
-                setData(result.data)
-            }
-            setLoading(false)
-            })
-            .catch(error => {
-                console.error('Error fetching user data:', error)
-                setError(error)
-                setLoading(false)
-            })
-
         if (isLargeScreen) {
             setBarSize(170)  // Taille pour grand écran
         } else if (isMediumScreen) {
@@ -37,18 +28,9 @@ function AverageScore() {
         } else if (isSmallScreen) {
             setBarSize(70)   // Taille pour petit écran
         }
-    }, [userId,isLargeScreen, isMediumScreen, isSmallScreen])
+    }, [])
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
-
-    if (error) {
-        return <div>Error: {error.message}</div>
-    }
-
-    const score = data.todayScore ? data.todayScore : data.score
-    const dataArray = [{ name: 'score', value: score * 100 }]
+    const dataArray = [{ name: 'score', value: props.score * 100 }]
 
     return (
         <div className='chartgoal'>
@@ -78,7 +60,7 @@ function AverageScore() {
             </ResponsiveContainer>
             <div className='chartgoal__text'>
                 <p className='chartgoal__text__score'>
-                    {score * 100}%
+                    {props.score * 100}%
                 </p>
                 <p className='chartgoal__text__obj'>de votre<br/>
                 objectif</p>
@@ -88,7 +70,10 @@ function AverageScore() {
 }
 
 AverageScore.propTypes = {
-    data: PropTypes.object
+    /**
+     * User data containing score or todayScore.
+     */
+    score: PropTypes.number
 }
 
 export default AverageScore

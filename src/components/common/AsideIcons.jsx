@@ -1,4 +1,13 @@
 
+/**
+ * AsideIcons component that displays a set of icons in the sidebar.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AsideIcons />
+ * )
+ */
 
 function AsideIcons() {
     return (
