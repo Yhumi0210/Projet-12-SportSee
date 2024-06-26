@@ -1,10 +1,12 @@
 const url = 'http://localhost:3000'
 const mock = (userId) => `${window.location.origin}/user/${userId}`
+
 /**
+ * Fetches user data from the API.
  * @param {string} userId
  * @returns {Promise<object>}
+ * @throws Will
  */
-
 const fetchUser = async (userId) => {
     try {
         const response = await fetch(`${url}/user/${userId}`)
@@ -20,6 +22,12 @@ const fetchUser = async (userId) => {
     }
 }
 
+/**
+ * Fetches user activity data from the API.
+ * @param {string} userId
+ * @returns {Promise<object>}
+ * @throws Will
+ */
 const fetchActivity = async (userId) => {
     try {
         const response = await fetch(`${url}/user/${userId}/activity`)
@@ -35,6 +43,12 @@ const fetchActivity = async (userId) => {
     }
 }
 
+/**
+ * Fetches user average sessions data from the API.
+ * @param {string} userId
+ * @returns {Promise<object>}
+ * @throws Will
+ */
 const fetchAverageSessions = async (userId) => {
     try {
         const response = await fetch(`${url}/user/${userId}/average-sessions`)
@@ -50,6 +64,12 @@ const fetchAverageSessions = async (userId) => {
     }
 }
 
+/**
+ * Fetches user performance data from the API.
+ * @param {string} userId
+ * @returns {Promise<object>}
+ * @throws Will
+ */
 const fetchTypeActivity = async (userId) => {
     try {
         const response = await fetch(`${url}/user/${userId}/performance`)

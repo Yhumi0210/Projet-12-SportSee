@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import CustomDot from './CustomDot.jsx'
 import CustomToolTip from './CustomToolTip.jsx'
@@ -8,15 +8,15 @@ import PropTypes from 'prop-types'
  * AverageSessions component that displays a line chart of the user's average session duration.
  *
  * @component
+ * @param {Object} props
+ * @param {Array<{day: number, sessionLength: number}>} props.averageSessions
  * @example
  * return (
- *   <AverageSessions />
+ *   <AverageSessions averageSessions={[{ day: 1, sessionLength: 30 }, { day: 2, sessionLength: 40 }]} />
  * )
  */
-
 function AverageSessions(props) {
     const [activeIndex] = useState(-1)
-
 
     /**
      * Format the label for the XAxis tick.
@@ -24,7 +24,6 @@ function AverageSessions(props) {
      * @param {number} value - The day of the week as a number.
      * @returns {string} The formatted day of the week.
      */
-
     const formatLabel = (value) => {
         const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
         return days[value - 1] || value
@@ -33,13 +32,12 @@ function AverageSessions(props) {
     /**
      * Custom rendering for the XAxis tick.
      *
-     * @param {object} props - The props for the custom tick.
+     * @param {Object} props - The props for the custom tick.
      * @param {number} props.x - The x-coordinate of the tick.
      * @param {number} props.y - The y-coordinate of the tick.
-     * @param {object} props.payload - The payload of the tick.
+     * @param {Object} props.payload - The payload of the tick.
      * @returns {JSX.Element} The custom tick element.
      */
-
     const renderCustomAxisTick = ({ x, y, payload }) => {
         const xOffset = 0
         return (
@@ -64,7 +62,7 @@ function AverageSessions(props) {
                         dataKey="sessionLength"
                         stroke="url(#colorUv)"
                         strokeWidth={2}
-                        activeDot={<CustomDot/>}
+                        activeDot={<CustomDot />}
                         dot={false}
                     />
                     <XAxis
@@ -74,7 +72,7 @@ function AverageSessions(props) {
                         tick={renderCustomAxisTick}
                         tickMargin={0}
                     />
-                    <Tooltip content={<CustomToolTip/>} cursor={false} />
+                    <Tooltip content={<CustomToolTip />} cursor={false} />
                     <YAxis hide domain={['dataMin-10', 'dataMax+10']} />
                     <defs>
                         <linearGradient
@@ -114,9 +112,15 @@ function AverageSessions(props) {
 
 AverageSessions.propTypes = {
     /**
-     * User data containing score or todayScore.
+     * The array of average session data.
+     * Each item should be an object with `day` and `sessionLength` properties.
      */
-    averageSessions: PropTypes.array
+    averageSessions: PropTypes.arrayOf(
+        PropTypes.shape({
+            day: PropTypes.number.isRequired,
+            sessionLength: PropTypes.number.isRequired
+        })
+    ).isRequired
 }
 
 export default AverageSessions

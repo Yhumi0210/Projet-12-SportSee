@@ -1,22 +1,20 @@
-// import { useEffect, useState } from 'react'
-// import { useParams } from 'react-router-dom'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import CustomToolTip from './CustomToolTip.jsx'
-// import {fetchActivity} from '../../../services/service.js'
 import PropTypes from 'prop-types'
 
 /**
  * Activity component that displays a bar chart of daily activity.
  *
  * @component
+ * @param {Object} props
+ * @param {Array<{day: string, kilogram: number, calories: number}>} props.activities
  * @example
  * return (
- *   <Activity />
+ *   <Activity activities={[{ day: '2023-01-01', kilogram: 70, calories: 240 },
+ *   { day: '2023-01-02', kilogram: 69, calories: 220 }]} />
  * )
  */
-
 function Activity(props) {
-
     return (
         <div className='barchart'>
             <h2 className='barchart__title'>Activité quotidienne</h2>
@@ -71,9 +69,16 @@ function Activity(props) {
 
 Activity.propTypes = {
     /**
-     * User data containing user activity.
+     * The array of user activity data.
+     * Each item should be an object with `day`, `kilogram`, and `calories` properties.
      */
-    activities: PropTypes.array
+    activities: PropTypes.arrayOf(
+        PropTypes.shape({
+            day: PropTypes.string.isRequired,
+            kilogram: PropTypes.number.isRequired,
+            calories: PropTypes.number.isRequired,
+        })
+    ).isRequired
 }
 
 export default Activity

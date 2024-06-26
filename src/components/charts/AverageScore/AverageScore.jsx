@@ -7,12 +7,13 @@ import PropTypes from 'prop-types'
  * AverageScore component that displays a radial bar chart of the user's average score.
  *
  * @component
+ * @param {Object} props
+ * @param {number} props.score
  * @example
  * return (
- *   <AverageScore />
+ *   <AverageScore score={0.7} />
  * )
  */
-
 function AverageScore(props) {
     const [barSize, setBarSize] = useState(130)
 
@@ -28,7 +29,7 @@ function AverageScore(props) {
         } else if (isSmallScreen) {
             setBarSize(70)   // Taille pour petit écran
         }
-    }, [])
+    }, [isLargeScreen, isMediumScreen, isSmallScreen])
 
     const dataArray = [{ name: 'score', value: props.score * 100 }]
 
@@ -63,7 +64,7 @@ function AverageScore(props) {
                     {props.score * 100}%
                 </p>
                 <p className='chartgoal__text__obj'>de votre<br/>
-                objectif</p>
+                    objectif</p>
             </div>
         </div>
     )
@@ -71,9 +72,9 @@ function AverageScore(props) {
 
 AverageScore.propTypes = {
     /**
-     * User data containing score or todayScore.
+     * The user's score, represented as a fraction (e.g., 0.7 for 70%).
      */
-    score: PropTypes.number
+    score: PropTypes.number.isRequired
 }
 
 export default AverageScore

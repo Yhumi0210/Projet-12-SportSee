@@ -1,5 +1,18 @@
 import PropTypes from 'prop-types'
 
+/**
+ * CustomDot component that renders custom dots for a chart.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {number} props.cx - The x-coordinate of the dot.
+ * @param {number} props.cy - The y-coordinate of the dot.
+ * @param {string} [props.stroke='#fff'] - The stroke color of the dot.
+ * @example
+ * return (
+ *   <CustomDot cx={100} cy={100} stroke="#FF0000" />
+ * )
+ */
 const CustomDot = ({ cx, cy, stroke }) => {
     return (
         <g>
@@ -10,8 +23,19 @@ const CustomDot = ({ cx, cy, stroke }) => {
 }
 
 CustomDot.propTypes = {
+    /**
+     * The x-coordinate of the dot.
+     */
     cx: PropTypes.number.isRequired,
+
+    /**
+     * The y-coordinate of the dot.
+     */
     cy: PropTypes.number.isRequired,
+
+    /**
+     * The stroke color of the dot.
+     */
     stroke: PropTypes.string
 }
 

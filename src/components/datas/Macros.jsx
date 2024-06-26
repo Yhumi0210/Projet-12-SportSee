@@ -7,8 +7,8 @@ import {fetchUser} from '../../services/service.js'
  * Macro component that fetches and displays the user's macro data.
  *
  * @component
- * @param {object} props - The component props.
- * @param {string} props.type - The type of macro data to display. Can be 'calorieCount', 'proteinCount', 'carbohydrateCount', or 'lipidCount'.
+ * @param {object} props
+ * @param {string} props.type
  * @example
  * return (
  *   <Macro type="calorieCount" />
@@ -74,7 +74,6 @@ function Macro({ type }) { // 'type' peut être 'calorieCount', 'proteinCount', 
 Macro.propTypes = {
     /**
      * The type of macro data to display.
-     * Can be 'calorieCount', 'proteinCount', 'carbohydrateCount', or 'lipidCount'.
      */
     type: PropTypes.oneOf(['calorieCount', 'proteinCount', 'carbohydrateCount', 'lipidCount']).isRequired,
 }

@@ -1,6 +1,17 @@
 import PropTypes from 'prop-types'
 
-
+/**
+ * CustomToolTip component that renders a custom tooltip for a chart.
+ *
+ * @component
+ * @param {Object} props
+ * @param {boolean} props.active
+ * @param {Array} props.payload
+ * @example
+ * return (
+ *   <CustomToolTip active={true} payload={[{ value: 50 }, { value: 200 }]} />
+ * )
+ */
 function CustomToolTip({ active, payload }) {
     if (active && payload && payload.length) {
         return (
@@ -26,9 +37,15 @@ function CustomToolTip({ active, payload }) {
 }
 
 CustomToolTip.propTypes = {
+    /**
+     * Indicates if the tooltip is active.
+     */
     active: PropTypes.bool,
-    payload: PropTypes.array,
 
+    /**
+     * The payload of the tooltip data.
+     */
+    payload: PropTypes.array,
 }
 
 export default CustomToolTip
