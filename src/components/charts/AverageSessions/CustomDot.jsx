@@ -26,12 +26,12 @@ CustomDot.propTypes = {
     /**
      * The x-coordinate of the dot.
      */
-    cx: PropTypes.number.isRequired,
+    cx: PropTypes.number,
 
     /**
      * The y-coordinate of the dot.
      */
-    cy: PropTypes.number.isRequired,
+    cy: PropTypes.number,
 
     /**
      * The stroke color of the dot.

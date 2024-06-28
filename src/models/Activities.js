@@ -16,7 +16,7 @@ export default class Activities {
          */
         this.activities = data.sessions.map((session, index) => ({
             ...session,
-            day: index + 1,
+            day: (index + 1).toString(),
             calories: session.calories,
             kilogram: session.kilogram
         }))

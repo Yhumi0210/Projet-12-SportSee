@@ -12,6 +12,7 @@ import Activities from '../../models/Activities.js'
 import User from '../../models/User.js'
 import Session from '../../models/Session.js'
 import ActivityType from '../../models/TypeActivity.js'
+import Macro from '../../models/Macros.js'
 
 /**
  * MainContent component that serves as the main content section of the application,
@@ -24,21 +25,34 @@ import ActivityType from '../../models/TypeActivity.js'
  * )
  */
 function MainContent() {
-    const { userId } = useParams()+10
+    const { userId } = useParams()
     const [activities, setActivities] = useState([])
     const [user, setUser] = useState({})
     const [averageSessions, setSessions] = useState([])
     const [typeActivity, setTypeActivity] = useState([])
     const [ loading, setLoading ] = useState(true)
+    const [ error, setError ] = useState(false)
+    const [ macros, setMacros ] = useState([])
 
     const getUser = async() => {
         try {
             const result = await fetchUser(userId)
             setUser(new User(result.data))
+
+            let newMacros = []
+            for (let key in result.data.keyData) {
+                newMacros.push(new Macro({
+                    type: key,
+                    value: result.data.keyData[key]
+                }))
+            }
+            setMacros(newMacros)
+
             return result
         }
         catch (error) {
-            return error
+            console.log(error)
+            throw error
         }
     }
     const getActivity = async() => {
@@ -48,7 +62,8 @@ function MainContent() {
             return result
         }
         catch (error) {
-            return error
+            console.log(error)
+            throw error
         }
     }
     const getAverageSessions = async() => {
@@ -58,7 +73,8 @@ function MainContent() {
             return result
         }
         catch (error) {
-            return error
+            console.log(error)
+            throw error
         }
     }
     const getTypeActivity = async() => {
@@ -68,7 +84,8 @@ function MainContent() {
             return result
         }
         catch (error) {
-            return error
+            console.log(error)
+            throw error
         }
     }
 
@@ -80,8 +97,9 @@ function MainContent() {
             getTypeActivity()
         ]).then(() => {
             setLoading(false)
-        }).catch(()=> {
-            console.log('all error')
+        }).catch((error)=> {
+            console.log('all error', error)
+            setError(true)
         })
     }, [])
 
@@ -98,7 +116,7 @@ function MainContent() {
 
                 <p className='maincontent__applause'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
                 <div className='maincontent__chart'>
-                    {!loading?
+                    {!loading && !error ?
                         <div className='maincontent__chart__graph'>
                             <Activity activities={activities}/>
                             <div className='row'>
@@ -106,13 +124,12 @@ function MainContent() {
                                 <TypeActivity typeActivity={typeActivity}/>
                                 <AverageScore score={user.score}/>
                             </div>
-                        </div> : <div>Loading...</div>
+                        </div> : <div>Impossible de récupérer vos données</div>
                     }
                     <div className='allmacros'>
-                        <Macros type="calorieCount"/>
-                        <Macros type="proteinCount"/>
-                        <Macros type="carbohydrateCount"/>
-                        <Macros type="lipidCount"/>
+                        {
+                            macros.map((macro, index) => <Macros key={index} type={macro.type} value={macro.value} />)
+                        }
                     </div>
                 </div>
             </article>

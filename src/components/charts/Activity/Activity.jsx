@@ -36,6 +36,7 @@ function Activity(props) {
                            tickMargin={16}/>
                     <YAxis
                         yAxisId="kilogram"
+                        dataKey='kilogram'
                         orientation="right"
                         tickMargin={30}
                         tick={{ fill: '#9B9EAC' }}
@@ -44,7 +45,7 @@ function Activity(props) {
                         domain={['dataMin-2', 'dataMax+1']}
                         tickCount={3}
                     />
-                    <YAxis yAxisId="calories" orientation="left" stroke="#9B9EAC" hide={true}/>
+                    <YAxis yAxisId="calories" dataKey='calories' orientation="left" stroke="#9B9EAC" hide={true}/>
                     <Tooltip content={<CustomToolTip />} cursor={{ fill: 'rgba(196, 196, 196, 0.3)' }}/>
                     <Legend
                         className="custom-legend"

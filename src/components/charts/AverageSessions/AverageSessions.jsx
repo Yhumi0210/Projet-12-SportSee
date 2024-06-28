@@ -62,7 +62,7 @@ function AverageSessions(props) {
                         dataKey="sessionLength"
                         stroke="url(#colorUv)"
                         strokeWidth={2}
-                        activeDot={<CustomDot />}
+                        activeDot={<CustomDot/>}
                         dot={false}
                     />
                     <XAxis
@@ -73,7 +73,7 @@ function AverageSessions(props) {
                         tickMargin={0}
                     />
                     <Tooltip content={<CustomToolTip />} cursor={false} />
-                    <YAxis hide domain={['dataMin-10', 'dataMax+10']} />
+                    <YAxis dataKey="sessionLength" hide domain={['dataMin-10', 'dataMax+10']} />
                     <defs>
                         <linearGradient
                             id="colorUv"

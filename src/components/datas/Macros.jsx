@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {fetchUser} from '../../services/service.js'
 
 /**
  * Macro component that fetches and displays the user's macro data.
@@ -15,25 +12,7 @@ import {fetchUser} from '../../services/service.js'
  * )
  */
 
-function Macro({ type }) { // 'type' peut être 'calorieCount', 'proteinCount', 'carbohydrateCount', ou 'lipidCount'
-    const { userId } = useParams()
-    const [value, setValue] = useState(0)
-    const [setError] = useState(null)
-
-    useEffect(() => {
-        if (!userId) {
-            setError("User ID is not defined")
-            return
-        }
-        fetchUser(userId).then(result => {
-            if (result && result.data && result.data.keyData && result.data.keyData[type]) {
-                setValue(result.data.keyData[type])
-            }
-        })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des données utilisateur :', error)
-            })
-    }, [])
+function Macro({ type, value }) { // 'type' peut être 'calorieCount', 'proteinCount', 'carbohydrateCount', ou 'lipidCount'
 
     /**
      * Format the type to a readable string.
@@ -76,6 +55,7 @@ Macro.propTypes = {
      * The type of macro data to display.
      */
     type: PropTypes.oneOf(['calorieCount', 'proteinCount', 'carbohydrateCount', 'lipidCount']).isRequired,
+    value: PropTypes.number.isRequired
 }
 
 export default Macro

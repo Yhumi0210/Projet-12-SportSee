@@ -18,7 +18,7 @@ const fetchUser = async (userId) => {
         return result
     } catch (error) {
         console.error('Error fetching user data:', error)
-        return error
+        throw error
     }
 }
 
@@ -39,7 +39,7 @@ const fetchActivity = async (userId) => {
         return result
     } catch (error) {
         console.error('Error fetching user activity data:', error)
-        return error
+        throw error
     }
 }
 
@@ -60,7 +60,7 @@ const fetchAverageSessions = async (userId) => {
         return result
     } catch (error) {
         console.error('Error fetching user average sessions data:', error)
-        return error
+        throw error
     }
 }
 
@@ -81,7 +81,7 @@ const fetchTypeActivity = async (userId) => {
         return result
     } catch (error) {
         console.error('Error fetching user performance data:', error)
-        return error
+        throw error
     }
 }
 
