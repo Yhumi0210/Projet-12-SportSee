@@ -24,30 +24,66 @@ import ActivityType from '../../models/TypeActivity.js'
  * )
  */
 function MainContent() {
-    const { userId } = useParams()
+    const { userId } = useParams()+10
     const [activities, setActivities] = useState([])
     const [user, setUser] = useState({})
     const [averageSessions, setSessions] = useState([])
     const [typeActivity, setTypeActivity] = useState([])
+    const [ loading, setLoading ] = useState(true)
+
+    const getUser = async() => {
+        try {
+            const result = await fetchUser(userId)
+            setUser(new User(result.data))
+            return result
+        }
+        catch (error) {
+            return error
+        }
+    }
+    const getActivity = async() => {
+        try {
+            const result = await fetchActivity(userId)
+            setActivities(new Activities(result.data).activities)
+            return result
+        }
+        catch (error) {
+            return error
+        }
+    }
+    const getAverageSessions = async() => {
+        try {
+            const result = await fetchAverageSessions(userId)
+            setSessions(result.data.sessions.map(item => new Session(item)))
+            return result
+        }
+        catch (error) {
+            return error
+        }
+    }
+    const getTypeActivity = async() => {
+        try {
+            const result = await fetchTypeActivity(userId)
+            setTypeActivity(result.data.data.map(item => new ActivityType(item)))
+            return result
+        }
+        catch (error) {
+            return error
+        }
+    }
 
     useEffect(() => {
-        fetchUser(userId).then(result => {
-            setUser(new User(result.data))
+        Promise.all([
+            getUser(),
+            getActivity(),
+            getAverageSessions(),
+            getTypeActivity()
+        ]).then(() => {
+            setLoading(false)
+        }).catch(()=> {
+            console.log('all error')
         })
-
-        fetchActivity(userId).then(result => {
-            const activity = new Activities(result.data)
-            setActivities(activity.activities)
-        })
-
-        fetchAverageSessions(userId).then(result => {
-            setSessions(result.data.sessions.map(item => new Session(item)))
-        })
-
-        fetchTypeActivity(userId).then(result => {
-            setTypeActivity(result.data.data.map(item => new ActivityType(item)))
-        })
-    }, [userId])
+    }, [])
 
     return (
         <section className='content'>
@@ -62,19 +98,21 @@ function MainContent() {
 
                 <p className='maincontent__applause'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
                 <div className='maincontent__chart'>
-                    <div className='maincontent__chart__graph'>
-                        <Activity activities={activities} />
-                        <div className='row'>
-                            <AverageSessions averageSessions={averageSessions} />
-                            <TypeActivity typeActivity={typeActivity} />
-                            <AverageScore score={user.score} />
-                        </div>
-                    </div>
+                    {!loading?
+                        <div className='maincontent__chart__graph'>
+                            <Activity activities={activities}/>
+                            <div className='row'>
+                                <AverageSessions averageSessions={averageSessions}/>
+                                <TypeActivity typeActivity={typeActivity}/>
+                                <AverageScore score={user.score}/>
+                            </div>
+                        </div> : <div>Loading...</div>
+                    }
                     <div className='allmacros'>
-                        <Macros type="calorieCount" />
-                        <Macros type="proteinCount" />
-                        <Macros type="carbohydrateCount" />
-                        <Macros type="lipidCount" />
+                        <Macros type="calorieCount"/>
+                        <Macros type="proteinCount"/>
+                        <Macros type="carbohydrateCount"/>
+                        <Macros type="lipidCount"/>
                     </div>
                 </div>
             </article>
