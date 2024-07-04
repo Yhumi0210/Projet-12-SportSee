@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import CustomDot from './CustomDot.jsx'
+import CustomCursor from './CustomCursor.jsx'
 import CustomToolTip from './CustomToolTip.jsx'
 import PropTypes from 'prop-types'
 
@@ -56,7 +57,7 @@ function AverageSessions({ averageSessions }) {
                         tick={renderCustomAxisTick}
                         tickMargin={0}
                     />
-                    <Tooltip content={<CustomToolTip />} cursor={false} />
+                    <Tooltip content={<CustomToolTip />} cursor={<CustomCursor/>} />
                     <YAxis dataKey="sessionLength" hide domain={['dataMin-10', 'dataMax+10']} />
                     <defs>
                         <linearGradient
