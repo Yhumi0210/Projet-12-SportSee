@@ -26,13 +26,13 @@ import Macro from '../../models/Macros.js'
  */
 function MainContent() {
     const { userId } = useParams()
-    const [activities, setActivities] = useState([])
     const [user, setUser] = useState({})
+    const [ macros, setMacros ] = useState([])
+    const [activities, setActivities] = useState([])
     const [averageSessions, setSessions] = useState([])
     const [typeActivity, setTypeActivity] = useState([])
     const [ loading, setLoading ] = useState(true)
     const [ error, setError ] = useState(false)
-    const [ macros, setMacros ] = useState([])
 
     const getUser = async() => {
         try {
