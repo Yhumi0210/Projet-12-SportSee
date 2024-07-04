@@ -35,7 +35,7 @@ function TypeActivity(props) {
     return (
         <div className='radarchart'>
             <ResponsiveContainer width='100%' height='100%'>
-                <RadarChart outerRadius={RadarSize} data={props.typeActivity.reverse()}>
+                <RadarChart outerRadius={RadarSize} data={props.typeActivity}>
                     <PolarGrid gridType="polygon" stroke="white" radialLines={false} />
                     <PolarAngleAxis dataKey="name" tick={{ fill: '#FFFFFF', fontSize: 12 }} tickSize={10} />
                     <PolarRadiusAxis axisLine={false} domain={[0, 250]} tick={false} tickCount={7} />

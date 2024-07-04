@@ -9,7 +9,7 @@ const kindMapping = {
     4: 'Force',
     5: 'Vitesse',
     6: 'Intensité'
-};
+}
 
 /**
  * Class representing an Activity Type.

@@ -15,33 +15,17 @@ import PropTypes from 'prop-types'
  *   <AverageSessions averageSessions={[{ day: 1, sessionLength: 30 }, { day: 2, sessionLength: 40 }]} />
  * )
  */
-function AverageSessions(props) {
+function AverageSessions({ averageSessions }) {
     const [activeIndex] = useState(-1)
 
-    /**
-     * Format the label for the XAxis tick.
-     *
-     * @param {number} value - The day of the week as a number.
-     * @returns {string} The formatted day of the week.
-     */
     const formatLabel = (value) => {
         const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
         return days[value - 1] || value
     }
 
-    /**
-     * Custom rendering for the XAxis tick.
-     *
-     * @param {Object} props - The props for the custom tick.
-     * @param {number} props.x - The x-coordinate of the tick.
-     * @param {number} props.y - The y-coordinate of the tick.
-     * @param {Object} props.payload - The payload of the tick.
-     * @returns {JSX.Element} The custom tick element.
-     */
     const renderCustomAxisTick = ({ x, y, payload }) => {
-        const xOffset = 0
         return (
-            <text x={x + xOffset} y={y} dy={0} fill="rgba(255, 255, 255, 0.50)" fontSize="0.8rem" textAnchor="middle">
+            <text x={x} y={y} dy={0} fill="rgba(255, 255, 255, 0.50)" fontSize="0.8rem" textAnchor="middle">
                 {formatLabel(payload.value)}
             </text>
         )
@@ -56,7 +40,7 @@ function AverageSessions(props) {
                 sessions
             </h3>
             <ResponsiveContainer width='100%' height='100%'>
-                <LineChart data={props.averageSessions} margin={{ top: 0, right: 20, left: 20, bottom: 0 }}>
+                <LineChart data={averageSessions} margin={{ top: 0, right: 20, left: 20, bottom: 0 }}>
                     <Line
                         type="natural"
                         dataKey="sessionLength"
@@ -111,10 +95,6 @@ function AverageSessions(props) {
 }
 
 AverageSessions.propTypes = {
-    /**
-     * The array of average session data.
-     * Each item should be an object with `day` and `sessionLength` properties.
-     */
     averageSessions: PropTypes.arrayOf(
         PropTypes.shape({
             day: PropTypes.number.isRequired,

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types'
  *   <CustomDot cx={100} cy={100} stroke="#FF0000" />
  * )
  */
-const CustomDot = ({ cx, cy, stroke }) => {
+const CustomDot = ({ cx, cy, stroke = '#fff' }) => {
     return (
         <g>
             <circle cx={cx} cy={cy} r={10} fill={stroke} fillOpacity={0.3} />
@@ -37,10 +37,6 @@ CustomDot.propTypes = {
      * The stroke color of the dot.
      */
     stroke: PropTypes.string
-}
-
-CustomDot.defaultProps = {
-    stroke: '#fff'
 }
 
 export default CustomDot

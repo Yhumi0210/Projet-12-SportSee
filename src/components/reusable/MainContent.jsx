@@ -121,10 +121,10 @@ function MainContent() {
                             <Activity activities={activities}/>
                             <div className='row'>
                                 <AverageSessions averageSessions={averageSessions}/>
-                                <TypeActivity typeActivity={typeActivity}/>
+                                <TypeActivity typeActivity={typeActivity.reverse()}/>
                                 <AverageScore score={user.score}/>
                             </div>
-                        </div> : <div>Impossible de récupérer vos données</div>
+                        </div> : <div className='error'>Impossible de récupérer vos données</div>
                     }
                     <div className='allmacros'>
                         {

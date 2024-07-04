@@ -31,7 +31,7 @@ const fetchUser = async (userId) => {
 const fetchActivity = async (userId) => {
     try {
         const response = await fetch(`${url}/user/${userId}/activity`)
-        //const response = await fetch(mock(userId)+'/activity.json')
+        // const response = await fetch(mock(userId)+'/activity.json')
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         }

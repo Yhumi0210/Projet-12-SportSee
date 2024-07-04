@@ -14,13 +14,13 @@ import PropTypes from 'prop-types'
  *   { day: '2023-01-02', kilogram: 69, calories: 220 }]} />
  * )
  */
-function Activity(props) {
+function Activity({ activities }) {
     return (
         <div className='barchart'>
             <h2 className='barchart__title'>Activité quotidienne</h2>
             <ResponsiveContainer width='100%' height='100%'>
                 <BarChart
-                    data={props.activities}
+                    data={activities}
                     margin={{
                         top: 10, right: 0, left: 0, bottom: 10,
                     }}
@@ -69,10 +69,6 @@ function Activity(props) {
 }
 
 Activity.propTypes = {
-    /**
-     * The array of user activity data.
-     * Each item should be an object with `day`, `kilogram`, and `calories` properties.
-     */
     activities: PropTypes.arrayOf(
         PropTypes.shape({
             day: PropTypes.string.isRequired,
