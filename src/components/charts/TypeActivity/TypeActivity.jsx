@@ -15,7 +15,7 @@ import PropTypes from 'prop-types'
  *   { name: 'Energie', value: 80 }]} />
  * )
  */
-function TypeActivity(props) {
+function TypeActivity({typeActivity}) {
     const [RadarSize, setRadarSize] = useState(130)
 
     const isLargeScreen = useMediaQuery({ minWidth: 1440 })
@@ -35,7 +35,7 @@ function TypeActivity(props) {
     return (
         <div className='radarchart'>
             <ResponsiveContainer width='100%' height='100%'>
-                <RadarChart outerRadius={RadarSize} data={props.typeActivity}>
+                <RadarChart outerRadius={RadarSize} data={typeActivity}>
                     <PolarGrid gridType="polygon" stroke="white" radialLines={false} />
                     <PolarAngleAxis dataKey="name" tick={{ fill: '#FFFFFF', fontSize: 12 }} tickSize={10} />
                     <PolarRadiusAxis axisLine={false} domain={[0, 250]} tick={false} tickCount={7} />

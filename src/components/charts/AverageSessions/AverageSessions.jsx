@@ -33,60 +33,21 @@ function AverageSessions({ averageSessions }) {
     }
 
     return (
-        <div className='linechart' style={{
-            backgroundColor: activeIndex >= 0 ? 'rgba(230, 0, 0, 0.5)' : ''
-        }}>
-            <h3 className='linechart__title'>
-                Durée moyenne des <br/>
-                sessions
-            </h3>
+        <div className='linechart' style={{backgroundColor: activeIndex >= 0 ? 'rgba(230, 0, 0, 0.5)' : ''}}>
+            <h3 className='linechart__title'>Durée moyenne des <br/> sessions</h3>
             <ResponsiveContainer width='100%' height='100%'>
                 <LineChart data={averageSessions} margin={{ top: 0, right: 20, left: 20, bottom: 0 }}>
-                    <Line
-                        type="natural"
-                        dataKey="sessionLength"
-                        stroke="url(#colorUv)"
-                        strokeWidth={2}
-                        activeDot={<CustomDot/>}
-                        dot={false}
-                    />
-                    <XAxis
-                        dataKey="day"
-                        axisLine={false}
-                        tickLine={false}
-                        tick={renderCustomAxisTick}
-                        tickMargin={0}
-                    />
+                    <Line type="natural" dataKey="sessionLength" stroke="url(#colorUv)" strokeWidth={2} activeDot={<CustomDot/>} dot={false}/>
+                    <XAxis dataKey="day" axisLine={false} tickLine={false} tick={renderCustomAxisTick} tickMargin={0}/>
                     <Tooltip content={<CustomToolTip />} cursor={<CustomCursor/>} />
                     <YAxis dataKey="sessionLength" hide domain={['dataMin-10', 'dataMax+10']} />
                     <defs>
-                        <linearGradient
-                            id="colorUv"
-                            x1="0%"
-                            y1="0"
-                            x2="100%"
-                            y2="0"
-                        >
-                            <stop
-                                offset="0%"
-                                stopColor="rgba(255, 255, 255, 0.3)"
-                            />
-                            <stop
-                                offset="20%"
-                                stopColor="rgba(255, 255, 255, 0.4)"
-                            />
-                            <stop
-                                offset="40%"
-                                stopColor="rgba(255, 255, 255, 0.5)"
-                            />
-                            <stop
-                                offset="60%"
-                                stopColor="rgba(255, 255, 255, 0.6)"
-                            />
-                            <stop
-                                offset="100%"
-                                stopColor="rgba(255, 255, 255, 1)"
-                            />
+                        <linearGradient id="colorUv" x1="0%" y1="0" x2="100%" y2="0">
+                            <stop offset="0%" stopColor="rgba(255, 255, 255, 0.3)"/>
+                            <stop offset="20%" stopColor="rgba(255, 255, 255, 0.4)"/>
+                            <stop offset="40%" stopColor="rgba(255, 255, 255, 0.5)"/>
+                            <stop offset="60%" stopColor="rgba(255, 255, 255, 0.6)"/>
+                            <stop offset="100%" stopColor="rgba(255, 255, 255, 1)"/>
                         </linearGradient>
                     </defs>
                 </LineChart>
@@ -94,7 +55,6 @@ function AverageSessions({ averageSessions }) {
         </div>
     )
 }
-
 AverageSessions.propTypes = {
     averageSessions: PropTypes.arrayOf(
         PropTypes.shape({
@@ -103,5 +63,4 @@ AverageSessions.propTypes = {
         })
     ).isRequired
 }
-
 export default AverageSessions

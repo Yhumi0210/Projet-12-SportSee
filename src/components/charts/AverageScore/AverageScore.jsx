@@ -37,26 +37,9 @@ function AverageScore(props) {
         <div className='chartgoal'>
             <h3 className='chartgoal__title'>Score</h3>
             <ResponsiveContainer width='100%' height='100%'>
-                <RadialBarChart
-                    innerRadius="0%"
-                    outerRadius="0%"
-                    data={dataArray}
-                    startAngle={90}
-                    endAngle={450}
-                >
-                    <RadialBar
-                        data={[{ value: 100 }]}
-                        dataKey="value"
-                        barSize={barSize}
-                        fill="#FFF"
-                        isAnimationActive={false}
-                    />
-                    <RadialBar
-                        dataKey="value"
-                        barSize={10}
-                        cornerRadius={100}
-                        fill="#FF0000"
-                    />
+                <RadialBarChart innerRadius="0%" outerRadius="0%" data={dataArray} startAngle={90} endAngle={450}>
+                    <RadialBar data={[{ value: 100 }]} dataKey="value" barSize={barSize} fill="#FFF" isAnimationActive={false}/>
+                    <RadialBar dataKey="value" barSize={10} cornerRadius={100} fill="#FF0000"/>
                 </RadialBarChart>
             </ResponsiveContainer>
             <div className='chartgoal__text'>
