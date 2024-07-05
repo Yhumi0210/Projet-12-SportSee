@@ -14,13 +14,12 @@ import UserSelection from './components/pages/UserSelection.jsx'
  * - "/user/:userId" renders the HomePage component.
  *
  */
-
 // Render the application to the root element
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <Router>
-        <Routes>
-            <Route path="/" element={<UserSelection />} />
-            <Route path="/user/:userId" element={<HomePage />} />
-        </Routes>
-    </Router>
+        <Router>
+            <Routes>
+                <Route path="/" element={<UserSelection />} />
+                <Route path="/user/:userId" element={<HomePage />} />
+            </Routes>
+        </Router>
 )

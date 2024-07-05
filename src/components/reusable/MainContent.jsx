@@ -6,7 +6,8 @@ import TypeActivity from '../charts/TypeActivity/TypeActivity.jsx'
 import AverageScore from '../charts/AverageScore/AverageScore.jsx'
 import Macros from '../datas/Macros.jsx'
 import { useEffect, useState } from 'react'
-import { fetchUser, fetchActivity, fetchAverageSessions, fetchTypeActivity } from '../../services/service.js'
+//import { fetchUser, fetchActivity, fetchAverageSessions, fetchTypeActivity } from '../../services/service.js'
+import { fetchData } from '../../services/serviceAutomatic.js'
 import { useParams } from 'react-router-dom'
 import Activities from '../../models/Activities.js'
 import User from '../../models/User.js'
@@ -36,7 +37,7 @@ function MainContent() {
 
     const getUser = async() => {
         try {
-            const result = await fetchUser(userId)
+            const result = await fetchData(`${userId}`)
             setUser(new User(result.data))
 
             let newMacros = []
@@ -51,13 +52,13 @@ function MainContent() {
             return result
         }
         catch (error) {
-            console.log(error)
+            console.log(error + ' error du getUser')
             throw error
         }
     }
     const getActivity = async() => {
         try {
-            const result = await fetchActivity(userId)
+            const result = await fetchData(`${userId}/activity`)
             setActivities(new Activities(result.data).activities)
             return result
         }
@@ -68,7 +69,7 @@ function MainContent() {
     }
     const getAverageSessions = async() => {
         try {
-            const result = await fetchAverageSessions(userId)
+            const result = await fetchData(`${userId}/average-sessions`)
             setSessions(result.data.sessions.map(item => new Session(item)))
             return result
         }
@@ -79,7 +80,7 @@ function MainContent() {
     }
     const getTypeActivity = async() => {
         try {
-            const result = await fetchTypeActivity(userId)
+            const result = await fetchData(`${userId}/performance`)
             setTypeActivity(result.data.data.map(item => new ActivityType(item)))
             return result
         }
@@ -97,9 +98,10 @@ function MainContent() {
             getTypeActivity()
         ]).then(() => {
             setLoading(false)
-        }).catch((error)=> {
+        }).catch((error) => {
             console.log('all error', error)
             setError(true)
+            setLoading(false)
         })
     }, [])
 
@@ -115,8 +117,9 @@ function MainContent() {
                 </h1>
 
                 <p className='maincontent__applause'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
-                <div className='maincontent__chart'>
-                    {!loading && !error ?
+
+                {!loading && !error ?
+                    <div className='maincontent__chart'>
                         <div className='maincontent__chart__graph'>
                             <Activity activities={activities}/>
                             <div className='row'>
@@ -124,14 +127,25 @@ function MainContent() {
                                 <TypeActivity typeActivity={typeActivity.toReversed()}/>
                                 <AverageScore score={user.score}/>
                             </div>
-                        </div> : <div className='error'>Impossible de récupérer vos données</div>
-                    }
-                    <div className='allmacros'>
-                        {
-                            macros.map((macro, index) => <Macros key={index} type={macro.type} value={macro.value} />)
-                        }
+                        </div>
+                        <div className='allmacros'>
+                            {
+                                macros.map((macro, index) => <Macros key={index} type={macro.type}
+                                                                     value={macro.value}/>)
+                            }
+                        </div>
                     </div>
-                </div>
+                    : loading ?
+                        <div className='maincontent__error'>
+                            <p className='maincontent__error__text'>Chargement de vos données</p>
+                            <img className='maincontent__error__loading' src='../../assets/img/loading.png' alt='loading'/>
+                        </div>
+                        : userId !== '12' && userId !== '18' ?
+                            <div className='maincontent__error'>Vos données n&apos;ont pas encore été enregistrés</div>
+                            :
+                            <div className='maincontent__error'>Impossible de récupérer vos données</div>
+
+                }
             </article>
         </section>
     )
