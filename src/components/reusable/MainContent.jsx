@@ -6,7 +6,6 @@ import TypeActivity from '../charts/TypeActivity/TypeActivity.jsx'
 import AverageScore from '../charts/AverageScore/AverageScore.jsx'
 import Macros from '../datas/Macros.jsx'
 import { useEffect, useState } from 'react'
-//import { fetchUser, fetchActivity, fetchAverageSessions, fetchTypeActivity } from '../../services/service.js'
 import { fetchData } from '../../services/serviceAutomatic.js'
 import { useParams } from 'react-router-dom'
 import Activities from '../../models/Activities.js'
@@ -38,6 +37,7 @@ function MainContent() {
     const getUser = async() => {
         try {
             const result = await fetchData(`${userId}`)
+            if (!result || !result.data) throw new Error('Data is undefined');
             setUser(new User(result.data))
 
             let newMacros = []
